@@ -13,16 +13,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-    <!-- Konfiguracija boja i fontova -->
+    <!-- Konfiguracija boja i fontova za Light Theme -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        champagne: '#c8a97e',    // Profinjena bronzano-zlatna
-                        champagneDark: '#a3865e',
-                        oledBlack: '#000000',    // Apsolutna crna
-                        charcoal: '#0a0a0a',     // Veoma tamna siva za dubinu
+                        champagne: '#b59261',    // Dublja, elegantnija zlatna za svijetli UI
+                        champagneLight: '#dfc59e',
+                        alabaster: '#fcfcfc',    // Vrlo nježna prljavo-bijela za sekcije
+                        ink: '#111827',          // Gotovo crna (tamno ugljen) za najbolju čitljivost
+                        inkLight: '#4b5563',     // Srednje siva za sekundarni tekst
                     },
                     fontFamily: {
                         sans: ['Montserrat', 'sans-serif'],
@@ -35,12 +36,12 @@
 
     <style>
         body {
-            background-color: #000000;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #111827;
             overflow-x: hidden;
         }
 
-        /* Glatki hover efekti za slike */
+        /* Glatki hover efekti za slike u stilu galerije */
         .img-container {
             overflow: hidden;
             position: relative;
@@ -49,45 +50,32 @@
             transition: transform 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         .car-card:hover .img-container img {
-            transform: scale(1.08);
+            transform: scale(1.05);
         }
 
-        /* Zatamnjenje slike na hover kako bi tekst iskočio */
-        .car-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.2) 50%, transparent 100%);
-            opacity: 0.8;
-            transition: opacity 0.7s ease;
-        }
-        .car-card:hover::after {
-            opacity: 0.95;
-        }
-
-        /* Minimalistički inputi za kontakt formu */
+        /* Minimalistički inputi za svijetlu temu */
         .luxury-input {
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid rgba(17, 24, 39, 0.2);
             border-radius: 0;
             padding: 12px 0;
-            color: white;
+            color: #111827;
             transition: all 0.4s ease;
         }
         .luxury-input:focus {
             outline: none;
-            border-bottom-color: #c8a97e;
+            border-bottom-color: #b59261;
             box-shadow: none;
         }
         .luxury-input::placeholder {
-            color: rgba(255, 255, 255, 0.3);
+            color: rgba(17, 24, 39, 0.4);
             text-transform: uppercase;
             letter-spacing: 2px;
             font-size: 0.75rem;
         }
 
-        /* Reveal Animacije na skrol (klase koje kontroliše JavaScript) */
+        /* Reveal Animacije na skrol */
         .reveal {
             opacity: 0;
             transform: translateY(40px);
@@ -98,32 +86,45 @@
             transform: translateY(0);
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #000; }
-        ::-webkit-scrollbar-thumb { background: #c8a97e; }
+        /* Elegantni Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #fafafa; }
+        ::-webkit-scrollbar-thumb { background: #b59261; }
+
+        /* Custom Toast Notification */
+        #toast {
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(20px) translateX(-50%);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        #toast.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0) translateX(-50%);
+        }
     </style>
 </head>
-<body class="antialiased selection:bg-champagne selection:text-black">
+<body class="antialiased selection:bg-champagne selection:text-white">
 
-    <!-- Navigacija (Ultra tanka i minimalistička) -->
+    <!-- Navigacija (Svijetla, blur efekat) -->
     <nav class="fixed w-full z-50 transition-all duration-500 py-6" id="navbar">
         <div class="max-w-[90%] mx-auto flex justify-between items-center">
             <a href="#" class="flex flex-col items-start z-50">
-                <span class="font-serif text-3xl font-medium tracking-widest text-white leading-none">ADAMEX</span>
-                <span class="text-[0.55rem] font-sans tracking-[0.4em] text-champagne uppercase mt-2">Auto Gradačac</span>
+                <span class="font-serif text-3xl font-medium tracking-widest text-ink leading-none">ADAMEX</span>
+                <span class="text-[0.55rem] font-sans tracking-[0.4em] text-champagne uppercase mt-2 font-medium">Auto Gradačac</span>
             </a>
             
             <!-- Desktop Meni -->
             <div class="hidden md:flex space-x-12 items-center">
-                <a href="#kolekcija" class="text-xs font-sans uppercase tracking-[0.2em] text-white/70 hover:text-champagne transition-colors duration-300">Kolekcija</a>
-                <a href="#filozofija" class="text-xs font-sans uppercase tracking-[0.2em] text-white/70 hover:text-champagne transition-colors duration-300">Filozofija</a>
-                <a href="#termin" class="text-xs font-sans uppercase tracking-[0.2em] text-black bg-champagne hover:bg-white px-8 py-3 transition-colors duration-300">Privatni Termin</a>
+                <a href="#kolekcija" class="text-xs font-sans uppercase tracking-[0.2em] text-inkLight hover:text-champagne transition-colors duration-300">Kolekcija</a>
+                <a href="#filozofija" class="text-xs font-sans uppercase tracking-[0.2em] text-inkLight hover:text-champagne transition-colors duration-300">Filozofija</a>
+                <a href="#termin" class="text-xs font-sans uppercase tracking-[0.2em] text-white bg-ink hover:bg-champagne px-8 py-3 transition-colors duration-300">Privatni Termin</a>
             </div>
 
             <!-- Mobile Meni Dugme -->
             <div class="md:hidden z-50">
-                <button id="mobile-menu-btn" class="text-white focus:outline-none">
+                <button id="mobile-menu-btn" class="text-ink focus:outline-none">
                     <svg class="w-8 h-8 font-thin" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
@@ -132,48 +133,51 @@
         </div>
 
         <!-- Mobile Meni Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-oledBlack z-40 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-500">
-            <a href="#kolekcija" class="mobile-link text-2xl font-serif tracking-widest text-white hover:text-champagne mb-8 transition-colors">KOLEKCIJA</a>
-            <a href="#filozofija" class="mobile-link text-2xl font-serif tracking-widest text-white hover:text-champagne mb-8 transition-colors">FILOZOFIJA</a>
-            <a href="#termin" class="mobile-link text-2xl font-serif tracking-widest text-champagne hover:text-white transition-colors">PRIVATNI TERMIN</a>
+        <div id="mobile-menu" class="fixed inset-0 bg-white z-40 flex flex-col justify-center items-center opacity-0 pointer-events-none transition-opacity duration-500">
+            <a href="#kolekcija" class="mobile-link text-2xl font-serif tracking-widest text-ink hover:text-champagne mb-8 transition-colors">KOLEKCIJA</a>
+            <a href="#filozofija" class="mobile-link text-2xl font-serif tracking-widest text-ink hover:text-champagne mb-8 transition-colors">FILOZOFIJA</a>
+            <a href="#termin" class="mobile-link text-2xl font-serif tracking-widest text-champagne hover:text-ink transition-colors">PRIVATNI TERMIN</a>
         </div>
     </nav>
 
-    <!-- Hero Sekcija (Filmski pristup) -->
-    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        <!-- Pozadinska Slika visoke rezolucije -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1614200187524-dc4b892acf16?auto=format&fit=crop&q=100&w=2500" alt="Luksuzni auto u sjeni" class="w-full h-full object-cover opacity-60 scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
-            <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-oledBlack"></div>
+    <!-- Hero Sekcija (Svijetla, prozračna) -->
+    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-alabaster">
+        <!-- Svijetla pozadinska slika -->
+        <div class="absolute inset-0 z-0 flex items-center justify-center">
+            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&q=100&w=2500" alt="Luksuzni auto na dnevnom svjetlu" class="w-full h-full object-cover opacity-60 scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
+            <!-- Bijeli/prozirni gradijent za čitljivost teksta -->
+            <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-white"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 mt-24">
-            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-6 reveal">Adamex Auto Gradačac</p>
-            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] font-light text-white mb-8 leading-none tracking-tight reveal" style="transition-delay: 200ms;">
-                Umjetnost<br/><span class="italic text-white/90">Automobilizma</span>
+            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-6 reveal font-medium">Adamex Auto Gradačac</p>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal" style="transition-delay: 200ms;">
+                Umjetnost<br/><span class="italic text-ink/80">Automobilizma</span>
             </h1>
         </div>
 
         <!-- Indikator za skrolanje -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center reveal" style="transition-delay: 600ms;">
-            <span class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-white/50 mb-4">Otkrijte</span>
+            <span class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-inkLight mb-4 font-medium">Otkrijte</span>
             <div class="w-[1px] h-16 bg-gradient-to-b from-champagne to-transparent"></div>
         </div>
     </header>
 
-    <!-- Filozofija (O nama - ali luksuznije rečeno) -->
-    <section id="filozofija" class="py-32 bg-oledBlack relative">
+    <!-- Filozofija (Galerijski stil) -->
+    <section id="filozofija" class="py-32 bg-white relative">
         <div class="max-w-[80%] mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div class="reveal">
-                    <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1200" alt="Detalj auta" class="w-full h-[600px] object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-1000" />
+                <div class="reveal relative">
+                    <!-- Dodana suptilna sjena iza slike za luksuzni volumen -->
+                    <div class="absolute -inset-4 bg-alabaster z-0 hidden lg:block"></div>
+                    <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1200" alt="Detalj auta" class="relative z-10 w-full h-[600px] object-cover shadow-2xl shadow-black/5" />
                 </div>
                 
                 <div class="reveal">
-                    <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-6">Naša Filozofija</h3>
-                    <h2 class="font-serif text-5xl md:text-6xl text-white mb-10 leading-tight">Beskompromisna<br/><span class="italic text-white/70">Elegancija</span></h2>
+                    <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-6 font-medium">Naša Filozofija</h3>
+                    <h2 class="font-serif text-5xl md:text-6xl text-ink mb-10 leading-tight">Beskompromisna<br/><span class="italic text-inkLight">Elegancija</span></h2>
                     
-                    <div class="space-y-8 font-sans font-light text-sm md:text-base text-white/60 leading-loose tracking-wide">
+                    <div class="space-y-8 font-sans font-light text-sm md:text-base text-inkLight leading-loose tracking-wide">
                         <p>
                             U svijetu gdje je prosječnost norma, Adamex Auto stoji kao bastion izuzetnosti. Nismo samo salon automobila u Gradačcu; mi smo kuratori najfinijih inženjerskih dostignuća.
                         </p>
@@ -189,149 +193,114 @@
         </div>
     </section>
 
-    <!-- Ekskluzivna Kolekcija (Umjesto "Ponuda") -->
-    <section id="kolekcija" class="py-32 bg-charcoal">
+    <!-- Ekskluzivna Kolekcija (Dizajn Kataloga) -->
+    <section id="kolekcija" class="py-32 bg-alabaster">
         <div class="max-w-[90%] mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
                 <div>
-                    <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4">Trenutno Dostupno</h3>
-                    <h2 class="font-serif text-5xl md:text-6xl text-white">Ekskluzivna <span class="italic">Kolekcija</span></h2>
+                    <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4 font-medium">Trenutno Dostupno</h3>
+                    <h2 class="font-serif text-5xl md:text-6xl text-ink">Ekskluzivna <span class="italic">Kolekcija</span></h2>
                 </div>
                 <div class="mt-6 md:mt-0">
-                    <p class="font-sans text-xs text-white/50 tracking-widest uppercase">Prikazano 6 vozila</p>
+                    <p class="font-sans text-xs text-inkLight tracking-widest uppercase font-medium">Prikazano 6 vozila</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Prebačeno na "Gallery Grid" gdje je tekst ispod slike umjesto preko -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                 
                 <!-- AUTO 1 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 1 -->
-                        <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=1000" alt="Mercedes S Class" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=1000" alt="Mercedes S Class" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 1 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Mercedes-Maybach S580</h3>
-                            <!-- OPIS AUTA 1 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2022 | 18.000 KM | V8 BiTurbo</p>
-                            <!-- CIJENA AUTA 1 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2022 | 18.000 KM | V8 BiTurbo</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">Mercedes-Maybach S580</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- AUTO 2 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 2 -->
-                        <img src="https://images.unsplash.com/photo-1503376760364-5fa8f121d5c5?auto=format&fit=crop&q=80&w=1000" alt="Porsche Panamera" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal" style="transition-delay: 100ms;">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1503376760364-5fa8f121d5c5?auto=format&fit=crop&q=80&w=1000" alt="Porsche Panamera" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 2 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Porsche Panamera GTS</h3>
-                            <!-- OPIS AUTA 2 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2021 | 32.000 KM | Benzin</p>
-                            <!-- CIJENA AUTA 2 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2021 | 32.000 KM | Benzin</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">Porsche Panamera GTS</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- AUTO 3 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 3 -->
-                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&q=80&w=1000" alt="Audi Q8" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal" style="transition-delay: 200ms;">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&q=80&w=1000" alt="Audi Q8" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 3 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Audi RS Q8</h3>
-                            <!-- OPIS AUTA 3 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2023 | 8.500 KM | V8 TFSI</p>
-                            <!-- CIJENA AUTA 3 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2023 | 8.500 KM | V8 TFSI</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">Audi RS Q8</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- AUTO 4 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 4 -->
-                        <img src="https://images.unsplash.com/photo-1556800572-1b8aeef2c54f?auto=format&fit=crop&q=80&w=1000" alt="BMW 8 Series" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1556800572-1b8aeef2c54f?auto=format&fit=crop&q=80&w=1000" alt="BMW 8 Series" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 4 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">BMW M8 Competition</h3>
-                            <!-- OPIS AUTA 4 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2020 | 41.000 KM | Benzin</p>
-                            <!-- CIJENA AUTA 4 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2020 | 41.000 KM | Benzin</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">BMW M8 Competition</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- AUTO 5 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 5 -->
-                        <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&q=80&w=1000" alt="Range Rover" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal" style="transition-delay: 100ms;">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&q=80&w=1000" alt="Range Rover" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 5 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Range Rover Autobiography</h3>
-                            <!-- OPIS AUTA 5 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2022 | 22.000 KM | Dizel</p>
-                            <!-- CIJENA AUTA 5 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2022 | 22.000 KM | Dizel</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">Range Rover Autobiography</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- AUTO 6 -->
-                <div class="car-card relative h-[500px] w-full cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="img-container absolute inset-0 z-0">
-                        <!-- OVDJE SLIKA AUTA 6 -->
-                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1000" alt="G Class" class="w-full h-full object-cover grayscale-[20%]" />
+                <div class="car-card group cursor-pointer reveal" style="transition-delay: 200ms;">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
+                        <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1000" alt="G Class" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
-                    <div class="absolute z-10 bottom-0 left-0 p-8 w-full flex flex-col justify-end h-full">
-                        <div class="transform translate-y-6 group-hover:translate-y-0 transition-transform duration-500">
-                            <!-- IME AUTA 6 -->
-                            <h3 class="font-serif text-3xl md:text-4xl text-white mb-2">Mercedes-Benz G63 AMG</h3>
-                            <!-- OPIS AUTA 6 -->
-                            <p class="font-sans text-[0.7rem] uppercase tracking-[0.2em] text-champagne mb-4">2023 | 5.000 KM | V8 BiTurbo</p>
-                            <!-- CIJENA AUTA 6 -->
-                            <div class="w-full h-[1px] bg-white/20 mb-4"></div>
-                            <div class="flex justify-between items-center">
-                                <span class="font-sans text-sm text-white tracking-widest">Cijena na upit</span>
-                                <span class="font-sans text-[0.65rem] uppercase tracking-widest text-white/50 hover:text-champagne transition-colors">Istražite &rarr;</span>
-                            </div>
+                    <div>
+                        <p class="font-sans text-[0.65rem] uppercase tracking-[0.2em] text-champagne mb-2 font-medium">2023 | 5.000 KM | V8 BiTurbo</p>
+                        <h3 class="font-serif text-3xl text-ink mb-4 group-hover:text-champagne transition-colors">Mercedes-Benz G63 AMG</h3>
+                        <div class="w-full h-[1px] bg-ink/10 mb-4"></div>
+                        <div class="flex justify-between items-center">
+                            <span class="font-sans text-sm text-ink font-medium tracking-widest">Cijena na upit</span>
+                            <span class="font-sans text-[0.65rem] uppercase tracking-widest text-inkLight group-hover:text-champagne transition-colors">Istražite &rarr;</span>
                         </div>
                     </div>
                 </div>
@@ -341,43 +310,49 @@
     </section>
 
     <!-- Kontakt / Privatni Termin -->
-    <section id="termin" class="py-32 bg-oledBlack">
+    <section id="termin" class="py-32 bg-white">
         <div class="max-w-[70%] mx-auto text-center reveal">
-            <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4">Vaš sljedeći korak</h3>
-            <h2 class="font-serif text-5xl md:text-6xl text-white mb-16">Zakažite Privatni Termin</h2>
+            <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4 font-medium">Vaš sljedeći korak</h3>
+            <h2 class="font-serif text-5xl md:text-6xl text-ink mb-16">Zakažite Privatni Termin</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 text-left mb-16">
-                <div>
-                    <h4 class="font-sans text-xs uppercase tracking-widest text-white/50 mb-2">Lokacija</h4>
-                    <p class="font-serif text-2xl text-white">Gradačac, 76250<br/>Bosna i Hercegovina</p>
+                <div class="p-8 border border-gray-100 bg-alabaster">
+                    <h4 class="font-sans text-xs uppercase tracking-widest text-inkLight mb-3">Lokacija</h4>
+                    <p class="font-serif text-2xl text-ink">Gradačac, 76250<br/>Bosna i Hercegovina</p>
                 </div>
-                <div>
-                    <h4 class="font-sans text-xs uppercase tracking-widest text-white/50 mb-2">Direktna Linija</h4>
-                    <p class="font-serif text-2xl text-white hover:text-champagne transition-colors">
+                <div class="p-8 border border-gray-100 bg-alabaster">
+                    <h4 class="font-sans text-xs uppercase tracking-widest text-inkLight mb-3">Direktna Linija</h4>
+                    <p class="font-serif text-2xl text-ink hover:text-champagne transition-colors">
                         <a href="tel:+38761407442">+387 61 407 442</a>
                     </p>
                 </div>
             </div>
 
-            <!-- Minimalistička forma -->
-            <form class="space-y-10 text-left" onsubmit="event.preventDefault(); alert('Vaš zahtjev za termin je zaprimljen.');">
+            <!-- Minimalistička forma (Pro level bez ružnih alertova) -->
+            <form id="contact-form" class="space-y-10 text-left">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                    <input type="text" class="luxury-input w-full font-sans text-sm" placeholder="Gospodin / Gospođa (Ime i Prezime)">
-                    <input type="tel" class="luxury-input w-full font-sans text-sm" placeholder="Kontakt Broj">
+                    <input type="text" required class="luxury-input w-full font-sans text-sm" placeholder="Gospodin / Gospođa (Ime i Prezime)">
+                    <input type="tel" required class="luxury-input w-full font-sans text-sm" placeholder="Kontakt Broj">
                 </div>
-                <input type="text" class="luxury-input w-full font-sans text-sm" placeholder="Model od interesa">
-                <button type="submit" class="w-full bg-transparent border border-champagne text-champagne font-sans text-xs uppercase tracking-[0.3em] py-5 hover:bg-champagne hover:text-black transition-all duration-500 mt-10">
+                <input type="text" class="luxury-input w-full font-sans text-sm" placeholder="Model od interesa (Opcionalno)">
+                <button type="submit" class="w-full bg-ink border border-ink text-white font-sans text-xs uppercase tracking-[0.3em] py-5 hover:bg-champagne hover:border-champagne transition-all duration-500 mt-10 shadow-lg shadow-black/5 hover:shadow-champagne/20">
                     Pošaljite Zahtjev
                 </button>
             </form>
         </div>
     </section>
 
-    <!-- Minimalistički Footer -->
-    <footer class="bg-oledBlack pb-10 pt-20 border-t border-white/5">
+    <!-- Custom Toast Message umjesto native alerta -->
+    <div id="toast" class="fixed bottom-10 left-1/2 z-50 bg-ink text-white px-8 py-4 shadow-2xl flex items-center space-x-4">
+        <svg class="w-6 h-6 text-champagne" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        <span class="font-sans text-sm tracking-widest uppercase">Zahtjev uspješno poslan.</span>
+    </div>
+
+    <!-- Svijetli Footer -->
+    <footer class="bg-alabaster pb-10 pt-20 border-t border-gray-200">
         <div class="max-w-[90%] mx-auto flex flex-col items-center justify-center">
-            <span class="font-serif text-4xl text-white/20 mb-4">A</span>
-            <p class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-white/40 text-center leading-loose">
+            <span class="font-serif text-4xl text-ink/20 mb-6">A</span>
+            <p class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-inkLight text-center leading-loose font-medium">
                 &copy; <span id="year"></span> Adamex Auto Gradačac.<br/>
                 Sva prava zadržana. Ekskluzivni distributer premium vozila.
             </p>
@@ -396,17 +371,19 @@
         // Postavljanje godine
         document.getElementById('year').textContent = new Date().getFullYear();
 
-        // Navigacija background pri skrolanju
+        // Navigacija background pri skrolanju (Light mode prilagodba)
         window.addEventListener('scroll', () => {
             const nav = document.getElementById('navbar');
             if (window.scrollY > 50) {
-                nav.style.backgroundColor = 'rgba(0, 0, 0, 0.9)';
+                nav.style.backgroundColor = 'rgba(255, 255, 255, 0.95)';
                 nav.style.backdropFilter = 'blur(10px)';
+                nav.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
                 nav.style.paddingTop = '1rem';
                 nav.style.paddingBottom = '1rem';
             } else {
                 nav.style.backgroundColor = 'transparent';
                 nav.style.backdropFilter = 'none';
+                nav.style.borderBottom = '1px solid transparent';
                 nav.style.paddingTop = '1.5rem';
                 nav.style.paddingBottom = '1.5rem';
             }
@@ -418,7 +395,7 @@
             for (var i = 0; i < reveals.length; i++) {
                 var windowHeight = window.innerHeight;
                 var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 100; // Kad se element pojavi na 100px od dna ekrana
+                var elementVisible = 100;
                 if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add("active");
                 }
@@ -451,8 +428,19 @@
                 menu.classList.remove('opacity-100', 'pointer-events-auto');
             });
         });
+
+        // Forma Submit sa Toast obavijesti (Umjesto alert-a)
+        document.getElementById('contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const toast = document.getElementById('toast');
+            toast.classList.add('show');
+            this.reset();
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 4000);
+        });
     </script>
 </body>
 </html>
-
 
