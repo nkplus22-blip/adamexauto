@@ -114,7 +114,7 @@
             100% { opacity: 1; }
         }
 
-        /* Suptilniji zoom, sada usidren za dno (bottom) kako ne bi sjekao sliku */
+        /* Suptilniji zoom, sada usidren za vrh kako bi slika rasla od naslova prema dole */
         @keyframes slowZoom {
             0% { transform: scale(1); }
             100% { transform: scale(1.03); }
@@ -156,32 +156,28 @@
         </div>
     </nav>
 
-    <!-- Hero Sekcija sa adamexlogo.png -->
-    <!-- PROMJENA: Dodan flex-col i pt-[20vh] da se tekst pomjeri gore -->
-    <header class="relative h-screen w-full flex flex-col items-center justify-start pt-[20vh] md:pt-[25vh] overflow-hidden bg-alabaster">
+    <!-- Hero Sekcija: Flex Column Layout za Naslov -> Slika ispod -->
+    <header class="relative h-screen w-full flex flex-col items-center justify-start overflow-hidden bg-alabaster pt-[120px] md:pt-[150px]">
         
-        <!-- Logo kao pozadina -->
-        <div class="absolute inset-0 z-0 fade-in-slow pointer-events-none">
-            <!-- PROMJENA: Dodano object-bottom da se auto usidri na dnu ekrana -->
-            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-full h-full object-contain object-bottom origin-bottom" style="animation: slowZoom 40s infinite alternate linear;" />
-            <!-- Blagi gradijent da se tekst i dalje vidi, a slika bude jasna -->
-            <div class="absolute inset-0 bg-white/10"></div>
-            <!-- Gradijent na samom dnu za gladak prijelaz u iduću sekciju -->
-            <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-alabaster to-transparent z-10"></div>
-        </div>
-
-        <!-- Tekst Sekcija -->
-        <!-- PROMJENA: Uklonjen mt-24 i prepušteno kontejneru da ga drži na vrhu -->
-        <div class="relative z-20 text-center px-4 w-full">
-            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-4 reveal font-medium drop-shadow-md">Adamex Auto Gradačac</p>
-            <h1 class="font-serif text-5xl md:text-7xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal drop-shadow-sm" style="transition-delay: 200ms;">
+        <!-- Tekst Sekcija (Fiksirana pri vrhu) -->
+        <div class="relative z-20 text-center px-4 w-full shrink-0">
+            <h1 class="font-serif text-[42px] md:text-7xl lg:text-[7rem] font-light text-ink leading-[1.1] tracking-tight reveal drop-shadow-sm" style="transition-delay: 200ms;">
                 Umjetnost<br/><span class="italic text-ink/90">Automobilizma</span>
             </h1>
         </div>
 
-        <!-- Indikator za skrolanje -->
+        <!-- Slika (Odmah ispod teksta, zauzima preostali prostor) -->
+        <div class="relative w-full flex-grow mt-6 md:mt-10 fade-in-slow z-10">
+            <!-- Dodano object-top kako bi fokus slike (krov auta) kretao odmah ispod slova -->
+            <img src="adamexlogo.png" alt="Adamex Vozilo" class="w-full h-full object-cover object-top origin-top" style="animation: slowZoom 40s infinite alternate linear;" />
+            
+            <!-- Gradijent na samom dnu za gladak prijelaz u iduću sekciju -->
+            <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-alabaster via-alabaster/80 to-transparent z-10"></div>
+        </div>
+
+        <!-- Indikator za skrolanje (Centriran i pozicioniran preko slike na dnu) -->
         <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center reveal z-20" style="transition-delay: 600ms;">
-            <span class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-inkLight mb-4 font-medium">Otkrijte</span>
+            <span class="font-sans text-[0.65rem] uppercase tracking-[0.4em] text-white/90 mb-4 font-medium drop-shadow-md">Otkrijte</span>
             <div class="w-[1px] h-16 bg-gradient-to-b from-champagne to-transparent"></div>
         </div>
     </header>
@@ -457,5 +453,4 @@
     </script>
 </body>
 </html>
-
 
