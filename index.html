@@ -103,6 +103,22 @@
             opacity: 1;
             transform: translateY(0) translateX(-50%);
         }
+        
+        /* Animacija sporog pojavljivanja (fade-in) */
+        .fade-in-slow {
+            opacity: 0;
+            animation: initialFade 4s ease-out forwards;
+        }
+        @keyframes initialFade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        /* Suptilniji zoom da ne izbaci farove iz kadra */
+        @keyframes slowZoom {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.03); }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-champagne selection:text-white">
@@ -144,16 +160,17 @@
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-alabaster">
         <!-- Logo kao pozadina -->
         <div class="absolute inset-0 z-0 flex items-center justify-center fade-in-slow">
-            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-full h-full object-cover scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
-            <!-- Blagi gradijent da se tekst i dalje vidi, a slika bude maksimalno jasna -->
-            <div class="absolute inset-0 bg-white/30"></div>
+            <!-- Dodan object-contain kako bi cijeli automobil (i farovi) ostao vidljiv bez rezanja stranica -->
+            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-[95%] md:w-[85%] lg:w-full h-full object-contain md:object-cover" style="animation: slowZoom 40s infinite alternate linear;" />
+            <!-- Blagi gradijent da se tekst i dalje vidi, a slika bude jasna -->
+            <div class="absolute inset-0 bg-white/20"></div>
             <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-alabaster to-transparent"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 mt-24">
-            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-6 reveal font-medium">Adamex Auto Gradačac</p>
-            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal" style="transition-delay: 200ms;">
-                Umjetnost<br/><span class="italic text-ink/80">Automobilizma</span>
+            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-6 reveal font-medium drop-shadow-md">Adamex Auto Gradačac</p>
+            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal drop-shadow-sm" style="transition-delay: 200ms;">
+                Umjetnost<br/><span class="italic text-ink/90">Automobilizma</span>
             </h1>
         </div>
 
@@ -207,7 +224,6 @@
                 </div>
             </div>
 
-            <!-- Prebačeno na "Gallery Grid" gdje je tekst ispod slike umjesto preko -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                 
                 <!-- AUTO 1 -->
@@ -360,23 +376,6 @@
         </div>
     </footer>
 
-    <style>
-        @keyframes slowZoom {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.1); }
-        }
-        
-        /* Animacija sporog pojavljivanja (fade-in) */
-        .fade-in-slow {
-            opacity: 0;
-            animation: initialFade 4s ease-out forwards;
-        }
-        @keyframes initialFade {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
-        }
-    </style>
-
     <!-- Skripte za interakcije -->
     <script>
         // Postavljanje godine
@@ -454,6 +453,5 @@
     </script>
 </body>
 </html>
-
 
 
