@@ -114,7 +114,7 @@
             100% { opacity: 1; }
         }
 
-        /* Suptilniji zoom da ne izbaci farove iz kadra */
+        /* Suptilniji zoom, sada usidren za dno (bottom) kako ne bi sjekao sliku */
         @keyframes slowZoom {
             0% { transform: scale(1); }
             100% { transform: scale(1.03); }
@@ -156,26 +156,31 @@
         </div>
     </nav>
 
-    <!-- Hero Sekcija sa adamexlogo.png u pozadini na vrhu -->
-    <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-alabaster">
+    <!-- Hero Sekcija sa adamexlogo.png -->
+    <!-- PROMJENA: Dodan flex-col i pt-[20vh] da se tekst pomjeri gore -->
+    <header class="relative h-screen w-full flex flex-col items-center justify-start pt-[20vh] md:pt-[25vh] overflow-hidden bg-alabaster">
+        
         <!-- Logo kao pozadina -->
-        <div class="absolute inset-0 z-0 flex items-center justify-center fade-in-slow">
-            <!-- Tuka e promenata: w-full h-full object-contain garantira, che avtomobilyt e vidim izcyalo bez izryazvane -->
-            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-full h-full object-contain" style="animation: slowZoom 40s infinite alternate linear;" />
+        <div class="absolute inset-0 z-0 fade-in-slow pointer-events-none">
+            <!-- PROMJENA: Dodano object-bottom da se auto usidri na dnu ekrana -->
+            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-full h-full object-contain object-bottom origin-bottom" style="animation: slowZoom 40s infinite alternate linear;" />
             <!-- Blagi gradijent da se tekst i dalje vidi, a slika bude jasna -->
-            <div class="absolute inset-0 bg-white/20"></div>
-            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-alabaster to-transparent"></div>
+            <div class="absolute inset-0 bg-white/10"></div>
+            <!-- Gradijent na samom dnu za gladak prijelaz u iduću sekciju -->
+            <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-alabaster to-transparent z-10"></div>
         </div>
 
-        <div class="relative z-10 text-center px-4 mt-24">
-            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-6 reveal font-medium drop-shadow-md">Adamex Auto Gradačac</p>
-            <h1 class="font-serif text-6xl md:text-8xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal drop-shadow-sm" style="transition-delay: 200ms;">
+        <!-- Tekst Sekcija -->
+        <!-- PROMJENA: Uklonjen mt-24 i prepušteno kontejneru da ga drži na vrhu -->
+        <div class="relative z-20 text-center px-4 w-full">
+            <p class="font-sans text-champagne tracking-[0.4em] uppercase text-xs md:text-sm mb-4 reveal font-medium drop-shadow-md">Adamex Auto Gradačac</p>
+            <h1 class="font-serif text-5xl md:text-7xl lg:text-[7rem] font-light text-ink mb-8 leading-none tracking-tight reveal drop-shadow-sm" style="transition-delay: 200ms;">
                 Umjetnost<br/><span class="italic text-ink/90">Automobilizma</span>
             </h1>
         </div>
 
         <!-- Indikator za skrolanje -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center reveal" style="transition-delay: 600ms;">
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center reveal z-20" style="transition-delay: 600ms;">
             <span class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-inkLight mb-4 font-medium">Otkrijte</span>
             <div class="w-[1px] h-16 bg-gradient-to-b from-champagne to-transparent"></div>
         </div>
@@ -186,7 +191,6 @@
         <div class="max-w-[80%] mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="reveal relative">
-                    <!-- Dodana suptilna sjena iza slike za luksuzni volumen -->
                     <div class="absolute -inset-4 bg-alabaster z-0 hidden lg:block"></div>
                     <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1200" alt="Detalj auta" class="relative z-10 w-full h-[600px] object-cover shadow-2xl shadow-black/5" />
                 </div>
@@ -439,7 +443,7 @@
             });
         });
 
-        // Forma Submit sa Toast obavijesti (Umjesto alert-a)
+        // Forma Submit sa Toast obavijesti
         document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const toast = document.getElementById('toast');
@@ -453,6 +457,5 @@
     </script>
 </body>
 </html>
-
 
 
