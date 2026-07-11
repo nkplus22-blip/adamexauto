@@ -1,4 +1,3 @@
-```html
 <!DOCTYPE html>
 <html lang="hr" class="scroll-smooth">
 <head>
@@ -37,7 +36,7 @@
 
     <style>
         body {
-            /* Osnovna boja prebačena na fiksni kontejner ispod kako bi logo bio vidljiv */
+            background-color: #ffffff;
             color: #111827;
             overflow-x: hidden;
         }
@@ -106,12 +105,7 @@
         }
     </style>
 </head>
-<body class="antialiased selection:bg-champagne selection:text-white relative">
-
-    <!-- Fiksni Pozadinski Logo (Vodeni Žig) -->
-    <div class="fixed inset-0 z-[-1] pointer-events-none flex items-center justify-center bg-white">
-        <img src="adamexlogo.png" alt="Adamex Background Logo" class="w-[80vw] md:w-[40vw] opacity-[0.03] object-contain grayscale" />
-    </div>
+<body class="antialiased selection:bg-champagne selection:text-white">
 
     <!-- Navigacija (Svijetla, blur efekat) -->
     <nav class="fixed w-full z-50 transition-all duration-500 py-6" id="navbar">
@@ -146,13 +140,13 @@
         </div>
     </nav>
 
-    <!-- Hero Sekcija (Svijetla, prozračna) -->
+    <!-- Hero Sekcija sa adamexlogo.png u pozadini na vrhu -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-alabaster">
-        <!-- Svijetla pozadinska slika -->
+        <!-- Logo kao pozadina -->
         <div class="absolute inset-0 z-0 flex items-center justify-center">
-            <img src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&q=100&w=2500" alt="Luksuzni auto na dnevnom svjetlu" class="w-full h-full object-cover opacity-60 scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
+            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-[80%] h-auto md:w-[50%] object-contain opacity-15 scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
             <!-- Bijeli/prozirni gradijent za čitljivost teksta -->
-            <div class="absolute inset-0 bg-gradient-to-b from-white/70 via-white/40 to-white"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/60 to-white"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 mt-24">
@@ -170,12 +164,12 @@
     </header>
 
     <!-- Filozofija (Galerijski stil) -->
-    <section id="filozofija" class="py-32 bg-transparent relative">
+    <section id="filozofija" class="py-32 bg-white relative">
         <div class="max-w-[80%] mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
                 <div class="reveal relative">
                     <!-- Dodana suptilna sjena iza slike za luksuzni volumen -->
-                    <div class="absolute -inset-4 bg-white/80 backdrop-blur-sm z-0 hidden lg:block"></div>
+                    <div class="absolute -inset-4 bg-alabaster z-0 hidden lg:block"></div>
                     <img src="https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?auto=format&fit=crop&q=80&w=1200" alt="Detalj auta" class="relative z-10 w-full h-[600px] object-cover shadow-2xl shadow-black/5" />
                 </div>
                 
@@ -200,8 +194,8 @@
     </section>
 
     <!-- Ekskluzivna Kolekcija (Dizajn Kataloga) -->
-    <section id="kolekcija" class="py-32 bg-alabaster/60 backdrop-blur-sm relative">
-        <div class="max-w-[90%] mx-auto relative z-10">
+    <section id="kolekcija" class="py-32 bg-alabaster">
+        <div class="max-w-[90%] mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-24 reveal">
                 <div>
                     <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4 font-medium">Trenutno Dostupno</h3>
@@ -212,12 +206,12 @@
                 </div>
             </div>
 
-            <!-- Gallery Grid -->
+            <!-- Prebačeno na "Gallery Grid" gdje je tekst ispod slike umjesto preko -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
                 
                 <!-- AUTO 1 -->
                 <div class="car-card group cursor-pointer reveal">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1617531653332-bd46c24f2068?auto=format&fit=crop&q=80&w=1000" alt="Mercedes S Class" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -233,7 +227,7 @@
 
                 <!-- AUTO 2 -->
                 <div class="car-card group cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1503376760364-5fa8f121d5c5?auto=format&fit=crop&q=80&w=1000" alt="Porsche Panamera" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -249,7 +243,7 @@
 
                 <!-- AUTO 3 -->
                 <div class="car-card group cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1606664515524-ed2f786a0bd6?auto=format&fit=crop&q=80&w=1000" alt="Audi Q8" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -265,7 +259,7 @@
 
                 <!-- AUTO 4 -->
                 <div class="car-card group cursor-pointer reveal">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1556800572-1b8aeef2c54f?auto=format&fit=crop&q=80&w=1000" alt="BMW 8 Series" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -281,7 +275,7 @@
 
                 <!-- AUTO 5 -->
                 <div class="car-card group cursor-pointer reveal" style="transition-delay: 100ms;">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1606016159991-dfe4f2746ad5?auto=format&fit=crop&q=80&w=1000" alt="Range Rover" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -297,7 +291,7 @@
 
                 <!-- AUTO 6 -->
                 <div class="car-card group cursor-pointer reveal" style="transition-delay: 200ms;">
-                    <div class="img-container aspect-[4/3] w-full bg-white mb-6 shadow-sm">
+                    <div class="img-container aspect-[4/3] w-full bg-gray-100 mb-6">
                         <img src="https://images.unsplash.com/photo-1614162692292-7ac56d7f7f1e?auto=format&fit=crop&q=80&w=1000" alt="G Class" class="w-full h-full object-cover grayscale-[10%] group-hover:grayscale-0 transition-all duration-700" />
                     </div>
                     <div>
@@ -316,18 +310,17 @@
     </section>
 
     <!-- Kontakt / Privatni Termin -->
-    <section id="termin" class="py-32 bg-transparent relative">
-        <div class="max-w-[70%] mx-auto text-center reveal relative z-10">
+    <section id="termin" class="py-32 bg-white">
+        <div class="max-w-[70%] mx-auto text-center reveal">
             <h3 class="font-sans text-champagne tracking-[0.3em] uppercase text-xs mb-4 font-medium">Vaš sljedeći korak</h3>
             <h2 class="font-serif text-5xl md:text-6xl text-ink mb-16">Zakažite Privatni Termin</h2>
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16 text-left mb-16">
-                <!-- Poluprozirni blokovi preko pozadinskog loga -->
-                <div class="p-8 border border-gray-100 bg-white/80 backdrop-blur-sm shadow-sm">
+                <div class="p-8 border border-gray-100 bg-alabaster">
                     <h4 class="font-sans text-xs uppercase tracking-widest text-inkLight mb-3">Lokacija</h4>
                     <p class="font-serif text-2xl text-ink">Gradačac, 76250<br/>Bosna i Hercegovina</p>
                 </div>
-                <div class="p-8 border border-gray-100 bg-white/80 backdrop-blur-sm shadow-sm">
+                <div class="p-8 border border-gray-100 bg-alabaster">
                     <h4 class="font-sans text-xs uppercase tracking-widest text-inkLight mb-3">Direktna Linija</h4>
                     <p class="font-serif text-2xl text-ink hover:text-champagne transition-colors">
                         <a href="tel:+38761407442">+387 61 407 442</a>
@@ -336,7 +329,7 @@
             </div>
 
             <!-- Minimalistička forma -->
-            <form id="contact-form" class="space-y-10 text-left bg-white/80 backdrop-blur-sm p-8 border border-gray-100 shadow-sm">
+            <form id="contact-form" class="space-y-10 text-left">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <input type="text" required class="luxury-input w-full font-sans text-sm" placeholder="Gospodin / Gospođa (Ime i Prezime)">
                     <input type="tel" required class="luxury-input w-full font-sans text-sm" placeholder="Kontakt Broj">
@@ -356,8 +349,8 @@
     </div>
 
     <!-- Svijetli Footer -->
-    <footer class="bg-alabaster/80 backdrop-blur-md pb-10 pt-20 border-t border-gray-200 relative">
-        <div class="max-w-[90%] mx-auto flex flex-col items-center justify-center relative z-10">
+    <footer class="bg-alabaster pb-10 pt-20 border-t border-gray-200">
+        <div class="max-w-[90%] mx-auto flex flex-col items-center justify-center">
             <span class="font-serif text-4xl text-ink/20 mb-6">A</span>
             <p class="font-sans text-[0.6rem] uppercase tracking-[0.3em] text-inkLight text-center leading-loose font-medium">
                 &copy; <span id="year"></span> Adamex Auto Gradačac.<br/>
@@ -451,4 +444,4 @@
 </body>
 </html>
 
-```
+
