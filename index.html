@@ -143,10 +143,11 @@
     <!-- Hero Sekcija sa adamexlogo.png u pozadini na vrhu -->
     <header class="relative h-screen w-full flex items-center justify-center overflow-hidden bg-alabaster">
         <!-- Logo kao pozadina -->
-        <div class="absolute inset-0 z-0 flex items-center justify-center">
-            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-[80%] h-auto md:w-[50%] object-contain opacity-15 scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
-            <!-- Bijeli/prozirni gradijent za čitljivost teksta -->
-            <div class="absolute inset-0 bg-gradient-to-b from-white/30 via-white/60 to-white"></div>
+        <div class="absolute inset-0 z-0 flex items-center justify-center fade-in-slow">
+            <img src="adamexlogo.png" alt="Adamex Logo Pozadina" class="w-full h-full object-cover scale-105" style="animation: slowZoom 30s infinite alternate linear;" />
+            <!-- Blagi gradijent da se tekst i dalje vidi, a slika bude maksimalno jasna -->
+            <div class="absolute inset-0 bg-white/30"></div>
+            <div class="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-alabaster to-transparent"></div>
         </div>
 
         <div class="relative z-10 text-center px-4 mt-24">
@@ -364,6 +365,16 @@
             0% { transform: scale(1); }
             100% { transform: scale(1.1); }
         }
+        
+        /* Animacija sporog pojavljivanja (fade-in) */
+        .fade-in-slow {
+            opacity: 0;
+            animation: initialFade 4s ease-out forwards;
+        }
+        @keyframes initialFade {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
     </style>
 
     <!-- Skripte za interakcije -->
@@ -443,5 +454,6 @@
     </script>
 </body>
 </html>
+
 
 
